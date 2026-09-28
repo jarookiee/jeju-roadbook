@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#f4e4c8">
+<title>济州岛路书 · 2026.10.02 – 10.06</title>
+<style>
+/* ============ 卡通油画风主题 ============ */
+:root{
+  --cream:#fdf6e8;      --paper:#f7ead2;
+  --ink:#4a3a2c;        --ink-soft:#8a7460;
+  --terra:#e07a5f;      --terra-d:#c25a3f;
+  --mustard:#e9b44c;    --olive:#8a9a5b;     --olive-d:#6b7a42;
+  --sky:#7fb3c8;        --plum:#b56576;
+  --line:#dcc7a4;
+  --shadow:0 6px 0 rgba(120,90,60,.13), 0 12px 26px rgba(120,90,60,.14);
+  --r:22px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-system,sans-serif;
+  color:var(--ink); background:var(--cream);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 12% 4%, rgba(233,180,76,.30), transparent 60%),
+    radial-gradient(ellipse 70% 45% at 92% 12%, rgba(127,179,200,.26), transparent 62%),
+    radial-gradient(ellipse 90% 55% at 50% 100%, rgba(224,122,95,.20), transparent 65%),
+    radial-gradient(ellipse 45% 35% at 78% 62%, rgba(138,154,91,.18), transparent 60%);
+  background-attachment:fixed;
+  line-height:1.72; font-size:15px; padding-bottom:60px;
+}
+/* 油画笔触纹理层 */
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:0; opacity:.5;
+  filter:url(#paint);
+  background:
+    repeating-linear-gradient(102deg, rgba(255,255,255,.10) 0 2px, transparent 2px 7px),
+    repeating-linear-gradient(14deg,  rgba(90,60,30,.045) 0 1px, transparent 1px 9px);
+}
+.wrap{position:relative; z-index:1; max-width:720px; margin:0 auto; padding:14px 14px 0}
+
+/* ---------- 头部 ---------- */
+header.hero{
+  background:linear-gradient(150deg,#fbe9c8,#f6d9ae 45%,#f0c9a0);
+  border:3px solid var(--ink); border-radius:26px; padding:20px 18px; box-shadow:var(--shadow);
+  position:relative; overflow:hidden;
+}
+header.hero::after{
+  content:""; position:absolute; right:-26px; bottom:-30px; width:130px; height:130px; border-radius:50%;
+  background:radial-gradient(circle at 35% 35%, rgba(233,180,76,.85), rgba(224,122,95,.45));
+  filter:url(#paint);
+}
+h1{margin:0 0 4px; font-size:23px; letter-spacing:.5px; text-shadow:1px 1px 0 rgba(255,255,255,.6)}
+h1 small{display:block; font-size:12.5px; font-weight:500; color:var(--ink-soft); letter-spacing:2px; margin-top:2px}
+.pills{display:flex; flex-wrap:wrap; gap:6px; margin-top:12px; position:relative; z-index:2}
+.pill{background:#fff9ee; border:2px solid var(--ink); border-radius:999px; padding:3px 11px; font-size:12.5px; font-weight:700}
+.pill.t{background:var(--mustard)} .pill.o{background:var(--olive); color:#fff}
+.pill.s{background:var(--sky)} .pill.r{background:var(--terra); color:#fff}
+
+/* ---------- 倒计时 ---------- */
+.count{display:flex; gap:8px; margin-top:14px; position:relative; z-index:2; flex-wrap:wrap}
+.count div{
+  background:#fffaf0; border:2.5px solid var(--ink); border-radius:16px; padding:7px 14px; text-align:center;
+  box-shadow:0 3px 0 rgba(120,90,60,.18); min-width:62px;
+}
+.count b{display:block; font-size:23px; line-height:1.15; color:var(--terra-d)}
+.count span{font-size:10.5px; color:var(--ink-soft); font-weight:700; letter-spacing:1px}
+
+/* ---------- 标签页 ---------- */
+nav.tabs{
+  position:sticky; top:0; z-index:50; display:flex; gap:6px; margin:16px -14px 0; padding:10px 14px 8px;
+  background:linear-gradient(180deg,var(--cream) 72%, rgba(253,246,232,0)); overflow-x:auto; scrollbar-width:none;
+}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs button{
+  flex:0 0 auto; font:inherit; font-weight:800; font-size:13.5px; cursor:pointer;
+  background:#fffaf0; border:2.5px solid var(--ink); border-radius:16px 16px 16px 4px; padding:8px 14px;
+  box-shadow:0 3px 0 rgba(120,90,60,.18); color:var(--ink); transition:.15s; white-space:nowrap;
+}
+nav.tabs button.on{background:var(--terra); color:#fff; transform:translateY(-2px); box-shadow:0 5px 0 rgba(120,90,60,.28)}
+nav.tabs button small{display:block; font-size:10px; font-weight:600; opacity:.8; letter-spacing:.5px}
+
+/* ---------- 卡片 ---------- */
+section.day{display:none} section.day.on{display:block; animation:fade .3s ease}
+@keyframes fade{from{opacity:0; transform:translateY(8px)}to{opacity:1; transform:none}}
+h2.title{font-size:18px; margin:18px 4px 10px; display:flex; align-items:center; gap:8px}
+h2.title .tag{font-size:11px; font-weight:800; padding:2px 9px; border-radius:999px; background:var(--mustard); border:2px solid var(--ink)}
+
+.card{
+  background:#fffaf0; border:3px solid var(--ink); border-radius:var(--r); padding:14px 15px;
+  margin-bottom:13px; box-shadow:var(--shadow); position:relative; overflow:hidden;
+}
+.card.move{background:linear-gradient(160deg,#eef4f7,#e2edf2)}
+.card.food{background:linear-gradient(160deg,#fdf0dc,#f8e3c4)}
+.card.warn{background:linear-gradient(160deg,#fbe4de,#f7d3ca)}
+.card.note{background:linear-gradient(160deg,#eef2e2,#e2ead2)}
+.card.todo{background:linear-gradient(160deg,#f2f2f2,#e6e6e6); border-style:dashed; opacity:.92}
+
+.row{display:flex; gap:11px; align-items:flex-start}
+.tm{
+  flex:0 0 62px; text-align:center; font-weight:900; font-size:14px; padding-top:2px;
+}
+.tm b{display:block; font-size:15.5px; color:var(--terra-d); letter-spacing:-.3px}
+.tm i{font-style:normal; font-size:10.5px; color:var(--ink-soft); font-weight:700}
+.ic{flex:0 0 34px; font-size:23px; line-height:1.2; text-align:center}
+.body{flex:1; min-width:0}
+.body h3{margin:0 0 2px; font-size:16px; letter-spacing:.2px}
+.kr{display:inline-block; font-size:11.5px; color:var(--ink-soft); font-weight:700; background:#f0e2c8;
+    border-radius:6px; padding:1px 7px; margin:2px 0 5px; word-break:break-all}
+.addr{font-size:12.5px; color:var(--ink-soft); margin:0 0 5px}
+.desc{margin:4px 0 0; font-size:13.8px; color:#5b483a}
+.desc li{margin:2px 0}
+ul{margin:4px 0; padding-left:19px}
+
+.meta{display:flex; flex-wrap:wrap; gap:5px; margin-top:8px}
+.chip{font-size:11.5px; font-weight:700; background:#efe0c4; border:1.5px solid #d9c39c;
+      border-radius:8px; padding:2px 8px; color:#6a563f}
+.chip.g{background:#dfe9d2; border-color:#b6c99c; color:#54632f}
+.chip.r{background:#f6dcd3; border-color:#e0ab98; color:#9c4630}
+.chip.b{background:#d8e9f0; border-color:#a3c8d8; color:#2f5c6e}
+.money{color:var(--terra-d); font-weight:800}
+
+.acts{display:flex; flex-wrap:wrap; gap:6px; margin-top:10px}
+.acts a, .acts button{
+  font:inherit; font-size:12px; font-weight:800; text-decoration:none; cursor:pointer;
+  border:2px solid var(--ink); border-radius:11px; padding:5px 10px; background:#fff;
+  color:var(--ink); box-shadow:0 2.5px 0 rgba(120,90,60,.2);
+}
+.acts a.n{background:var(--olive); color:#fff} .acts a.g{background:#fff}
+.acts a.k{background:var(--sky); color:#123} .acts a:active{transform:translateY(2px); box-shadow:none}
+.acts .done{background:var(--olive-d); color:#fff; border-color:var(--olive-d)}
+.acts .done::before{content:"✓ "}
+
+/* 折叠 */
+details.more{margin-top:9px; border-top:2px dashed var(--line); padding-top:8px}
+details.more summary{font-size:12.5px; font-weight:800; color:var(--terra-d); cursor:pointer; list-style:none}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary::before{content:"▸ ";}
+details.more[open] summary::before{content:"▾ ";}
+
+/* 表格 */
+.tbl{width:100%; border-collapse:separate; border-spacing:0 6px; font-size:13px; margin:6px 0}
+.tbl td{background:#fff; border:1.5px solid var(--line); padding:7px 9px; vertical-align:top}
+.tbl td:first-child{border-radius:11px 0 0 11px; font-weight:800; white-space:nowrap; background:#fdf1da}
+.tbl td:last-child{border-radius:0 11px 11px 0}
+.scroller{overflow-x:auto; -webkit-overflow-scrolling:touch}
+
+/* 清单 */
+.ck{display:flex; gap:10px; align-items:flex-start; padding:7px 0; border-bottom:1.5px dashed var(--line); font-size:13.6px}
+.ck:last-child{border-bottom:none}
+.ck input{width:21px; height:21px; margin-top:1px; accent-color:var(--olive-d); flex:0 0 auto; cursor:pointer}
+.ck label{cursor:pointer; flex:1}
+.ck input:checked+label{text-decoration:line-through; opacity:.5}
+
+/* 手写便签 */
+textarea{
+  width:100%; font:inherit; font-size:13.5px; color:#4a3a2c; background:#fffef8; border:2.5px dashed #d9c39c;
+  border-radius:14px; padding:10px 12px; resize:vertical; min-height:74px; line-height:1.7;
+}
+textarea:focus{outline:2px solid var(--mustard)}
+
+/* 折叠面板组 */
+.acc{border:3px solid var(--ink); border-radius:var(--r); background:#fffaf0; margin-bottom:13px; box-shadow:var(--shadow); overflow:hidden}
+.acc>summary{
+  list-style:none; cursor:pointer; padding:13px 15px; font-weight:900; font-size:15.5px;
+  background:linear-gradient(150deg,#fbe9c8,#f4d9a9); display:flex; align-items:center; gap:9px;
+}
+.acc>summary::-webkit-details-marker{display:none}
+.acc>summary::after{content:"＋"; margin-left:auto; font-size:19px; font-weight:900}
+.acc[open]>summary::after{content:"－"}
+.acc>div{padding:14px 15px}
+
+footer{text-align:center; font-size:11.5px; color:var(--ink-soft); padding:26px 10px 8px; line-height:1.9}
+.hint{font-size:11.5px; color:var(--ink-soft); font-style:italic; margin-top:6px}
+.bar{position:fixed; left:0; right:0; bottom:0; height:4px; background:var(--line); z-index:60}
+.bar i{display:block; height:100%; background:linear-gradient(90deg,var(--terra),var(--mustard)); transition:width .2s}
+
+@media (max-width:420px){
+  .tm{flex:0 0 54px; font-size:13px} .ic{flex:0 0 28px; font-size:20px}
+  h1{font-size:20px} .body h3{font-size:15px}
+}
+@media print{
+  body{background:#fff; padding:0} body::before{display:none}
+  nav.tabs,.bar,.acts{display:none}
+  section.day{display:block !important; page-break-after:always}
+  .acc,.card{break-inside:avoid; box-shadow:none}
+}
+</style>
+</head>
+<body>
+
+<!-- 油画笔触滤镜 -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="paint" x="-20%" y="-20%" width="140%" height="140%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.021 0.038" numOctaves="4" seed="7" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
+<div class="wrap">
+
+<header class="hero">
+  <h1>🍊 济州岛手绘路书
+    <small>JEJU ROADBOOK · 2026.10.02 – 10.06 · 2人 · 免签30天</small>
+  </h1>
+  <div class="pills">
+    <span class="pill t">🕐 时差 +1h</span>
+    <span class="pill o">🚕 打车+公交</span>
+    <span class="pill s">💳 Visa+现金55万</span>
+    <span class="pill r">📷 出片优先</span>
+    <span class="pill">🏠 구엄리 799-11</span>
+  </div>
+  <div class="count" id="count"></div>
+  <p class="hint" id="wx"></p>
+</header>
+
+<nav class="tabs" id="tabs"></nav>
+
+<main id="main"></main>
+
+<!-- ============ 实用信息 ============ -->
+<div id="util"></div>
+
+<footer>
+  制作用：AI 行程助手 · 数据整理于 2026.09<br>
+  票价/营业时间/班次请以当天实际为准 · 遇突发请联系 12308（外交部全球领保热线）
+</footer>
+
+</div>
+<div class="bar"><i id="prog"></i></div>
+
+<script>
+/* ==================== 数据（要补 10.5 / 10.6，直接在这里加即可） ==================== */
+const META = {
+  startISO:"2026-10-02T09:25:00+08:00",
+  sunset:"日落约 18:15–18:25",
+  hotel:{name:"구엄리 799-11", kr:"제주특별자치도 제주시 애월읍 구엄리 799-11", tel:""}
+};
+
+const DAYS = [
+{ id:"d1", date:"10-02", wk:"周五", tag:"抵达日", title:"落地 · 入住 · 民宿附近觅食",
+  note:"今天只做三件事：落地、入住、吃口热的。别排太满。",
+  items:[
+   {t:"06:55",ic:"🎒",h:"出发去机场",kr:"北新泾紫竹小区 → 航站楼",
+    d:["CA8567 09:25 上海起飞 → 11:00 温州龙湾抵达（<b>国内段</b>）","需重新托运+重新值机，预留 2.5h；<b>确认你的出票写的是虹桥T2 还是浦东T2</b>"]},
+   {t:"11:00",ic:"🧳",h:"温州龙湾中转",kr:"国内 → 国际",
+    d:["取出全部行李，<b>不要走行李直挂</b>","重新值机+安检，国际段通常要求提前 2h","过海关在济州入境时办，这里不用管"]},
+   {t:"14:05",ic:"✈️",h:"CA733 温州 → 济州",kr:"Wenzhou → Jeju (CJU)",
+    d:["约 17:05 抵达济州国际机场","落地时间按<b>韩国时间</b>（比上海早 1 小时）"]},
+   {t:"17:20",ic:"🛂",h:"入境（免签）",kr:"제주 입국심사",
+    d:["<b>济州岛个人免签 30 天</b>，走济州自由行通道","别走错去首尔/釜山——一旦离岛就要签证","顺手在到达厅<b>换少量韩元</b>或取现"]},
+   {t:"17:45",ic:"🚕",h:"打车去民宿",kr:"제주시 애월읍 구엄리",
+    d:["上车点：<b>航站楼 3 楼出发层 5 号门</b>（Gate 5, 3F）","车程约 40–50 分钟，费用约 18,000–22,000원","上车前跟司机说 <span class='kr'>구엄리 799-11</span> 给他看"]},
+   {t:"18:40",ic:"🏠",h:"入住 · 放行李",kr:"CHECK-IN",
+    d:["和民宿老板打个招呼，顺便问：<b>明天西线公交通讯、周边早餐、便利店位置</b>"]},
+   {t:"19:00",ic:"🍚",h:"晚餐 · 民宿周边自由觅食",kr:"DINNER",
+    d:["民宿老板推荐优先（他最清楚当天哪家开门）","备选 ↓"],
+    list:[
+      "<b>노을리</b>（애월해안로 656 · 09:00–21:00）— 就在구엄포海边，安静的日落咖啡馆，2层大窗",
+      "<b>애월연어</b>（하귀로 96 · 11:00–21:00 · 周日休）— 三文鱼/炸猪排，明早团游后也能用",
+      "<b>문개항아리 애월</b>（가문동길 38 · 09:30–19:30）— 海鲜拉面，招牌章鱼海鲜锅面",
+      "<b>CU / GS25 편의점</b> — 兜底，炸鸡+紫菜包饭+啤酒"
+    ]}
+  ]},
+
+{ id:"d2", date:"10-03", wk:"周六", tag:"西线", title:"崖月咖啡街 → 章鱼盖饭 → 狭才海浴场 → 日落 → 黑猪肉",
+  note:"今天是全程最满的一天。核心思路：上午咖啡街拍照，中午名门吃饭，下午海边玩水，傍晚看日落，晚上烤肉。<b>全程打车最省心</b>（2 人 1 车约 12,000–15,000원/段）。",
+  items:[
+   {t:"08:00",ic:"🥣",h:"早餐",kr:"BREAKFAST",
+    d:["民宿附近解决；若想坐下吃：<b>고내 고기국수</b>（애월해안로 494 · 08:00–16:00）济州肉汤面，暖胃","或便利店买便携早餐，路上吃"]},
+   {t:"09:00",ic:"☕",h:"崖月咖啡街",kr:"애월 카페거리 · 애월로1길 26-1",
+    d:["沿着海岸线一排独立咖啡馆，多数带<b>面海大窗 + 露台</b>，周六人多建议 9:30 前到","可顺走 <b>애월 한담 해안 산책로</b>（해안 산책로），一路都是海景步道，出片很好"],
+    list:[
+      "<b>봄날</b>（애월로1길 25 · 09:00–21:30）— 玻璃窗直接对着海，拍照最出名",
+      "<b>몽상드 애월</b>（애월북서길 56-1 · 09:00–20:30）— 椰子树+露台，构图最出片",
+      "<b>하이엔드 제주</b>（애월북서길 56 · 09:00–22:00）— 白色室内 + 屋顶露台",
+      "<b>해지개</b>（애월북서길 52）— 传统韩屋风格烘焙咖啡，招牌蒜面包",
+      "<b>노티드 도넛</b>（网红甜甜圈，需排队，可打包）",
+      "<b>节点想知道「休符」的韩文名？</b>把小红书的截图存好，落地用 Naver 地图 App 直接搜图里的店名最快"
+    ]},
+   {t:"11:00",ic:"🐙",h:"午饭 · 명자（Myeongja）",kr:"명자 · 애월읍 애월로 1길 22-1 2층",
+    d:["营业 <b>10:30–18:00</b>，<b>每周五休息</b> → 今天是周六，正常营业 ✅","电话 0507-1340-3343，<b>要靠窗位</b>（窗外就是海）","2 人点 2 碗就够，可以加一份小菜/饮料"],
+    list:[
+      "🏆 <b>돌문어 매콤 불고기 덮밥 16,000원</b> ← <b>就是你说的章鱼烤肉盖饭</b>（野生章鱼 + 微辣炒黑猪肉盖饭）",
+      "새연장 덮밥 16,000원 / 연어장 덮밥 16,000원（鳕鱼）/ 새우장 덮밥 14,000원（虾）",
+      "⚠️ 매콤 = <b>会辣</b>，不擅辣就让店员做温和一点（안 맵게 해주세요）"
+    ],
+    price:"人均约 16,000원"},
+   {t:"12:40",ic:"🚕",h:"打车 → 狭才海浴场",kr:"협재해수욕장 · 제주시 한림읍 협재리",
+    d:["车程约 25–30 分钟，费用约 12,000–15,000원","<b>202 路公交</b>（한림↔제주시 西海岸线）也能到，但班次疏、站点需现场确认，不赶时间可试"]},
+   {t:"13:10",ic:"🏖️",h:"狭才海浴场 玩水",kr:"협재해수욕장",
+    d:["10 月初海水约 <b>22–23°C</b>，下水会有点凉，建议泡 20–30 分钟就够","务必带：泳衣、沙滩巾、<b>防水手机袋</b>、拖鞋、换洗衣物","西侧海岸比东侧人少、水更清；旁边有储物柜和冲洗处"]},
+   {t:"15:40",ic:"🌾",h:"日落点",kr:"SUNSET",
+    d:["<b>「风车公园」的韩文名我还没查实</b>，落地后用 Naver 地图搜「애월 풍차」，看图和你的图片对一下再走","下面这几个都是<b>已确认的日落替代点</b>，就在咖啡街/民宿附近，不用跑远"],
+    list:[
+      "<b>몽상드 애월</b> 露台 — 椰子树+海，构图最好（<b>首选</b>）",
+      "<b>노을리</b>（애월해안로 656）— 就在民宿旁边，人少安静",
+      "<b>새물</b>（애월해안로 620）— 2 层户外露台，能躺着看海",
+      "<b>애월 한담 해안 산책로</b> — 海岸步道，一路都能拍逆光剪影",
+      "☀️ 提示：<b>10 月初日落约 18:15–18:25</b>，建议 17:30 前到位等光；海风大，外套别落下"
+    ]},
+   {t:"18:40",ic:"🥩",h:"晚餐 · 熏陶崖月黑猪肉",kr:"훈도 애월흑돼지 본점 · 애월로 37",
+    d:["营业 <b>11:00–22:00</b>，炭火现烤，有专用停车场，周六晚餐高峰<b>建议提前订位</b>","就在명자那条路上，从咖啡街打车 5–10 分钟"],
+    list:[
+      "🍖 <b>왕겨훈연 흑돼지</b> — 招牌，济州黑猪肉+内脏拼盘",
+      "김치찌개 / 된장찌개 / 멜젓 볶음밥（蘸酱炒饭）必点",
+      "🍺 配 <b>오렌지 주스</b> 或 제주 맥주 解腻"
+    ]},
+   {t:"20:30",ic:"🚕",h:"打车回民宿",kr:"구엄리 799-11",
+    d:["烤肉店到民宿约 10–15 分钟，路上有한담 해안 산책로 可以走一小段消食"]}
+  ]},
+
+{ id:"d3", date:"10-04", wk:"周日", tag:"东线跟团", title:"咸德 → 牛岛 → 城山日出峰 → 涉地可支 → 月汀里 → 免税店",
+  note:"今天是跟团日，<b>唯一要操心的就是早起打车去市区集合</b>。其余交给导游。",
+  items:[
+   {t:"06:10",ic:"⏰",h:"起床",kr:"WAKE UP",
+    d:["团游 7:10–7:30 市区接人，<b>从民宿打车过去要 30–40 分钟</b>，务必 6:10 起床"]},
+   {t:"06:20",ic:"🚕",h:"打车 → 济州市区集合点",kr:"제주시 시내 집결 장소",
+    d:["<b>请务必提前跟订单确认集合点具体地址</b>（团单上会写，可能是东门市场/연동一带）","车程约 30–40 分钟，费用约 13,000–16,000원","⚠️ 迟到团一般不等人，这一段千万别迟到"]},
+   {t:"07:10",ic:"🚌",h:"市区接人上车",kr:"PICK UP",
+    d:["行程单：07:10–07:30 市区接人"]},
+   {t:"09:10",ic:"🌊",h:"咸德海水浴场",kr:"함덕해수욕장 · 서우봉",
+    d:["东线第一站，서우봉（西岳峰）下面的海很出片，<b>不能下水</b>，沿岸走拍照即可"]},
+   {t:"10:00",ic:"🐄",h:"牛岛 游玩 + 午餐",kr:"우도 · 3–4 小时",
+    d:["<b>需要坐船</b>，船票<b>现场付 11,000원/人（约 55 元）</b>，备好现金/卡","岛上电动车或步行，环岛看海+彩色屋顶+牛","⚠️ 旺季船队排队久，这一段最容易超时，后面景点会顺延"]},
+   {t:"13:20",ic:"⛰️",h:"城山日出峰",kr:"성산일출봉 · 60 分钟",
+    d:["世界自然遗产，火山口看东海壮阔奇景","<b>体力活</b>：环形火山口步道，有台阶，穿舒服的鞋","门票一般跟团已含（不含则以现场为准）"]},
+   {t:"14:40",ic:"🌅",h:"涉地可支",kr:"섭지코지 · 50 分钟",
+    d:["<b>东线最佳出片点之一</b>：火山岩海崖 + 涉地可支灯塔 + 小渔村","下切到海边岩石平台的台阶很陡，要小心","日落方向在海上，下午光线就已经很能打了"]},
+   {t:"16:20",ic:"🏘️",h:"月汀里",kr:"월정리 · 50 分钟",
+    d:["咖啡街 + 网红打卡墙 + 广安八景之一，韩剧取景地 vibe","海边石阶下就是水，随便拍都好看"]},
+   {t:"17:30",ic:"🛍️",h:"东门市场 → 新罗免税店",kr:"동문시장 → 신라면세점",
+    d:["<b>下车点 1：东门市场</b>（只停 2 分钟，基本只是路过，可以不在这里买东西）","<b>下车点 2：新罗免税店</b> — 想逛就留 30–60 分钟，不想逛就在车上等","结束后自行打车回民宿"]},
+   {t:"18:30",ic:"🚕",h:"打车回民宿",kr:"구엄리 799-11",
+    d:["市区 → 民宿约 30–40 分钟","晚上自由安排晚餐：推荐 <b>애월연어</b> 或 <b>노을리</b>"]},
+   {t:"—",ic:"💳",h:"团费备忘",kr:"TOUR FEE",
+    d:["线上已付/待付：<span class='money'>154원</span> 元（服务费 50 + 司导 104，含牛岛往返车）","现场付：<span class='money'>约 55 元 / 11,000원</span>（牛岛船票）","导游好评直营价 209 元（参考）"],
+    warn:true}
+  ]},
+
+{ id:"d4", date:"10-05", wk:"周一", tag:"待补充", title:"— 待补充 —", todo:true,
+  note:"这天的行程你还没给我。已知的两个「顺手可加」选项 ↓",
+  items:[
+   {t:"?",ic:"🌋",h:"备选：山景线",kr:"한라산 / 1100 Highland",
+    d:["<b>1100 고지대</b>（한라산 1100고지）— 火山口草原，天气好能看汉拿山＋东海双景观","打车约 30 分钟，顺路可看 <b>천지연 폭포</b>（天地渊瀑布）","山上风冷、要爬坡，穿外套＋运动鞋"]},
+   {t:"?",ic:"🐟",h:"备选：海鲜线",kr:"대정읍 · 모범가리", todo:true,
+    d:["<b>대정읍 모범가리</b> — 济州人最爱的海边小村，海景+海鲜面+风车","打车从民宿约 35 分钟","周一很多店休，出发前查一下营业"]},
+   {t:"?",ic:"☕",h:"备选：咖啡+免税",kr:"한림 / 애월",
+    d:["<b>한림 멜빼기길</b> — 济州最有名的小巷，两侧全是彩色房子，10 分钟出片","或者干脆留在애월，补上昨天没逛的咖啡馆"]}
+  ]},
+
+{ id:"d5", date:"10-06", wk:"周二", tag:"待补充 · 返程", title:"— 待补充 — 21:30 济州飞上海", todo:true,
+  note:"返程航班 <b>9C8576 济州 21:30 → 上海 22:15</b>，所以这天<b>几乎是完整一天</b>。<b>建议 19:30–20:00 到机场</b>（韩国比上海早 1 小时）。",
+  items:[
+   {t:"待定",ic:"🛍️",h:"免税店预留 1 小时",kr:"면세점",
+    d:["你说「有空余可以留 1h 免税店」——最省事的做法：<b>去龙头免税店（용두시장 근처，龙头삼거리一带）</b>，靠近市区，逛完打车 20 分钟到机场","或者直接在机场的免税店退税区处理，不够时间现场买","<b>退税需要护照 + 当日购物小票，Visa 可退</b>","⚠️ 别忘了把退税单交给海关盖章再托运"]},
+   {t:"19:30",ic:"✈️",h:"到机场值机",kr:"제주국제공항 (CJU)",
+    d:["打车：市区/애월 → 机场约 40–50 分钟，费用约 18,000–22,000원","<b>春秋航空是廉航，行李额要提前确认</b>，超重现场买很贵","预留 2.5h（国际 + 退税 + 行李）"]}
+  ]}
+];
+
+/* ==================== 渲染 ==================== */
+const tabs=document.getElementById('tabs'), main=document.getElementById('main');
+const enc=encodeURIComponent;
+const q=a=>a.kr?`${a.name||''} ${a.kr} ${a.addr||''}`.trim():'';
+
+function mapLinks(a){
+  const query=enc(q(a));
+  return `<div class="acts">
+    <a class="n" target="_blank" rel="noopener" href="https://map.naver.com/p/search/${query}">🗺️ Naver 导航</a>
+    <a class="g" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${query}">Google</a>
+    <a class="k" target="_blank" rel="noopener" href="https://map.kakao.com/link/search/${query}">Kakao</a>
+    ${a.tel?`<a href="tel:${a.tel.replace(/[^0-9+]/g,'')}">📞 ${a.tel}</a>`:''}
+  </div>`;
+}
+
+/* tabs */
+DAYS.forEach((d,i)=>{
+  const b=document.createElement('button');
+  b.innerHTML=`${d.date}<small>${d.wk} · ${d.tag}</small>`;
+  b.onclick=()=>show(d.id);
+  b.dataset.id=d.id;
+  tabs.appendChild(b);
+});
+
+function show(id){
+  document.querySelectorAll('section.day').forEach(s=>s.classList.toggle('on',s.dataset.id===id));
+  document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.id===id));
+  localStorage.setItem('jejuDay',id);
+  window.scrollTo({top:document.querySelector('nav.tabs').offsetTop-4,behavior:'instant'});
+  setProg();
+}
+
+function renderDay(d){
+  const s=document.createElement('section');
+  s.className='day'+(d.todo?' todo':''); s.dataset.id=d.id;
+  let h=`<h2 class="title">${d.title}<span class="tag">${d.date} ${d.wk}</span></h2>`;
+  if(d.note) h+=`<div class="card note"><div class="row"><div class="ic">📌</div><div class="body"><div class="desc">${d.note}</div></div></div></div>`;
+  d.items.forEach((it,idx)=>{
+    const cls=it.warn?'warn':(it.list?'food':(it.d&&/车|打车|公交|导航|移动/.test(it.h)?'move':''));
+    h+=`<div class="card ${cls}">
+      <div class="row">
+        <div class="tm"><b>${it.t}</b></div>
+        <div class="ic">${it.ic}</div>
+        <div class="body">
+          <h3>${it.h}</h3>
+          ${it.kr?`<div class="kr">${it.kr}</div>`:''}
+          ${it.d?`<ul class="desc">${it.d.map(x=>`<li>${x}</li>`).join('')}</ul>`:''}
+          ${it.list?`<ul class="desc">${it.list.map(x=>`<li>${x}</li>`).join('')}</ul>`:''}
+          ${it.price?`<div class="meta"><span class="chip r">💰 ${it.price}</span></div>`:''}
+          ${mapLinks(it)}
+          <div class="acts" style="margin-top:6px">
+            <button class="ck-btn" data-d="${d.id}" data-i="${idx}">打卡</button>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  });
+  s.innerHTML=h;
+  main.appendChild(s);
+}
+DAYS.forEach(renderDay);
+
+/* ---------- 实用信息 ---------- */
+document.getElementById('util').innerHTML=`
+<details class="acc" open><summary>💳 支付 / 换汇 · 出发前必读</summary><div>
+  <ul class="desc">
+    <li><b>你带的是 Visa + 55万韩元现金</b>，够用但要注意分配：<b>随身 5万 + 民宿 5万 + 备用 5万</b>，别全放一个地方</li>
+    <li>济州岛<b>大量小店、海鲜摊、市场只收现金</b>：海鲜市场、乡下咖啡馆、公交、轮渡、路边摊</li>
+    <li>可刷 Visa：连锁咖啡（星巴克/Blue Bottle）、大型超市、乐天/Lotte 免税店、7-Eleven/CU（部分）</li>
+    <li>⚠️ <b>DCC 陷阱</b>：刷卡结账时若问你「用人民币还是韩元」，<b>一定选韩元 KRW</b>，别选人民币</li>
+    <li>落地换汇：<b>济州机场到达厅</b>有换汇窗口和 ATM（KB 国民银行、BC 카드 常见）；建议换 5–10万小额应急</li>
+    <li>应急：机场或市区 ATM 取现，<b>Visa 借记卡境外取现要提前在银行开通</b>，每笔收手续费</li>
+  </ul>
+</div></details>
+
+<details class="acc"><summary>📶 网络 · 电话 · 紧急</summary><div>
+  <ul class="desc">
+    <li><b>eSIM（最省事）</b>：出发前在 Airalo / Nomad / Klook 买韩国流量包，落地开卡即用</li>
+    <li><b>随身 WiFi</b>：济州机场有租，约 8,000–12,000원/天，2人合用划算</li>
+    <li>中国移动/联通<b>国际漫游</b>可直接开通，落地前发短信开通即可（最省事但贵一点）</li>
+    <li>韩国是 <b>KT / SK / LG 三家</b>，酒店和民宿 WiFi 一般够用</li>
+    <li>报警 <b>112</b> · 急救/消防 <b>119</b> · 中国外交部全球领保热线 <b>+86-010-12308</b></li>
+    <li>中国驻济州总领事馆：请出行前在 <b>中国领事服务网 cs.mfa.gov.cn</b> 核实最新地址与电话</li>
+  </ul>
+</div></details>
+
+<details class="acc"><summary>🗣️ 实用韩语（照着念就行）</summary><div>
+  <div class="scroller"><table class="tbl">
+    <tr><td>안녕하세요</td><td>你好（进门/打招呼万能）</td></tr>
+    <tr><td>이거 주세요</td><td>请给我这个</td></tr>
+    <tr><td>이거 두 개 주세요</td><td>请给我两个</td></tr>
+    <tr><td>메뉴 좀 주세요</td><td>请给我菜单</td></tr>
+    <tr><td>얼마예요?</td><td>多少钱？</td></tr>
+    <tr><td>계산해 주세요</td><td>请结账</td></tr>
+    <tr><td>포장해 주세요</td><td>请帮我打包</td></tr>
+    <tr><td>안 맵게 해 주세요</td><td>请做不辣（명자 那碗要辣一定要说）</td></tr>
+    <tr><td>화장실 어디예요?</td><td>洗手间在哪？</td></tr>
+    <tr><td>이거 얼마예요?</td><td>这个多少钱？</td></tr>
+    <tr><td>여기 앉아도 돼요?</td><td>可以坐这里吗？</td></tr>
+    <tr><td>사진 좀 찍어 주세요</td><td>帮我拍张照（递手机时）</td></tr>
+    <tr><td>너무 맵지 않게 해 주세요</td><td>请做得不那么辣</td></tr>
+    <tr><td>카드 돼요?</td><td>可以刷卡吗？</td></tr>
+    <tr><td>현금만 돼요</td><td>只能付现金（对方答这句就说明得掏钱）</td></tr>
+    <tr><td>잘 먹겠습니다</td><td>我要开动了（开饭前说）</td></tr>
+  </table></div>
+</div></details>
+
+<details class="acc"><summary>🎒 打包清单（照着勾）</summary><div>
+  <div class="ck"><input type="checkbox" id="c1"><label for="c1">护照（原件）+ 电子客票截图（离线保存）</label></div>
+  <div class="ck"><input type="checkbox" id="c2"><label for="c2">Visa 卡 + <b>韩元现金分 3 处放</b>（随身/民宿/包底）</label></div>
+  <div class="ck"><input type="checkbox" id="c3"><label for="c3">泳衣、沙滩巾、拖鞋、<b>防水手机袋</b>（狭才海浴场要用）</label></div>
+  <div class="ck"><input type="checkbox" id="c4"><label for="c4">薄外套/防风衣（海边风大 + 1100고지 山上冷）</label></div>
+  <div class="ck"><input type="checkbox" id="c5"><label for="c5">晕船药（10.4 牛岛坐船，1小时船程）</label></div>
+  <div class="ck"><input type="checkbox" id="c6"><label for="c6">充电宝 + 充电线；韩式插座是<b>圆孔双扁脚</b>，带个转换头更稳</label></div>
+  <div class="ck"><input type="checkbox" id="c7"><label for="c7">eSIM / 随身WiFi（出发前就买好）</label></div>
+  <div class="ck"><input type="checkbox" id="c8"><label for="c8">10.4 团费的<b>现金</b>（现场付牛岛船票 11,000원）</label></div>
+  <div class="ck"><input type="checkbox" id="c9"><label for="c9">团单集合点具体地址（<b>发给民宿老板/司机看</b>）</label></div>
+  <div class="ck"><input type="checkbox" id="c10"><label for="c10">把这份 HTML 存到手机主屏（离线可看）</label></div>
+</div></details>
+
+<details class="acc"><summary>🌤 10 月初济州天气 & 拍照贴士</summary><div>
+  <ul class="desc">
+    <li>10 月初济州：<b>白天 20–24°C，早晚 16–18°C</b>，晴天多、阵雨也可能</li>
+    <li><b>日落 18:15–18:25</b>，西海岸（애월）看海上日落，东海岸（城山/涉地可支）看日落撞海</li>
+    <li>海边的<b>软壳/风衣</b>比羽绒服实用；鞋子要好走路的（城山日出峰有台阶）</li>
+    <li>出片：<b>棉花糖云</b>在济州特别常见，上午或雨后最容易出；海边<b>长曝光 + 三脚架</b>效果最好</li>
+    <li>下载一张 <b>离线地图</b>（Naver Map 或 KakaoMap 支持离线），山区信号一般</li>
+    <li>实时天气：韩国气象厅 <b>weather.go.kr</b> / 手机 App「/newhighfive」类天气均可</li>
+  </ul>
+</div></details>
+
+<details class="acc"><summary>✍️ 我的备注（自动保存）</summary><div>
+  <textarea id="notes" placeholder="随手记：房东电话、司机电话、想去的店、餐厅预约结果、集合点…&#10;（内容会存在本机浏览器里，刷新不丢）"></textarea>
+</div></details>`;
+
+/* ---------- 打卡（localStorage） ---------- */
+const ckKey='jejuCk';
+function loadCk(){try{return JSON.parse(localStorage.getItem(ckKey))||{}}catch(e){return{}}}
+function saveCk(o){localStorage.setItem(ckKey,JSON.stringify(o))}
+function paintCk(){
+  const st=loadCk();
+  document.querySelectorAll('.ck-btn').forEach(b=>{
+    const on=!!st[b.dataset.d+'|'+b.dataset.i];
+    b.classList.toggle('done',on);
+    b.textContent=on?'已打卡':'打卡';
+  });
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('.ck-btn'); if(!b) return;
+  const k=b.dataset.d+'|'+b.dataset.i, st=loadCk();
+  st[k]=!st[k]; saveCk(st); paintCk(); setProg();
+});
+
+/* 清单勾选持久化 */
+const LS='jejuPack';
+function pack(){try{return JSON.parse(localStorage.getItem(LS))||[]}catch(e){return[]}}
+document.querySelectorAll('.acc .ck input').forEach(i=>{
+  if(pack().includes(i.id)) i.checked=true;
+  i.addEventListener('change',()=>{const a=pack();const j=a.indexOf(i.id);
+    i.checked? (j<0&&a.push(i.id)) : (j>=0&&a.splice(j,1)); savePack(a);});
+});
+function savePack(a){localStorage.setItem(LS,JSON.stringify(a));}
+
+/* ---------- 倒计时 ---------- */
+function tick(){
+  const now=new Date(), go=new Date(META.startISO);
+  let d=Math.floor((go-now)/864e5);
+  const box=document.getElementById('count');
+  if(d>0){
+    box.innerHTML=`<div><b>${d}</b><span>天后出发</span></div>
+      <div><b>${META.startISO.slice(5,10).replace('-','.')}</b><span>起飞日</span></div>
+      <div><b>4</b><span>晚住宿</span></div>
+      <div><b>2</b><span>人同行</span></div>`;
+  } else {
+    const on=DAYS.find(x=>x.date===now.toISOString().slice(5,10).replace('-','-'));
+    box.innerHTML=`<div><b>🏝</b><span>${on?on.date+' '+on.wk:'济州岛旅行中'}</span></div>
+      <div><b>${META.sunset.slice(0,2)}</b><span>日落时间</span></div>
+      <div><b>18:15</b><span>咖啡街</span></div>`;
+  }
+  // 自动切到今天
+  const t=now.toISOString().slice(5,10);
+  if(DAYS.some(x=>x.date===t) && !sessionStorage.getItem('jejuAuto')){
+    sessionStorage.setItem('jejuAuto','1'); show('d'+DAYS.findIndex(x=>x.date===t));
+  }
+}
+tick(); setInterval(tick,60000);
+
+/* 天气卡 */
+document.getElementById('wx').textContent =
+  `☀️ 10 月初济州：白天 20–24°C / 早晚 16–18°C · ${META.sunset} · 住宿：${META.hotel.kr}`;
+
+/* ---------- 进度条 ---------- */
+function setProg(){
+  const all=document.querySelectorAll('.ck-btn').length, done=document.querySelectorAll('.ck-btn.done').length;
+  document.getElementById('prog').style.width=(all?done/all*100:0)+'%';
+}
+
+/* 备注 */
+const nt=document.getElementById('notes');
+nt.value=localStorage.getItem('jejuNotes')||'';
+nt.addEventListener('input',()=>localStorage.setItem('jejuNotes',nt.value));
+
+/* 初始 tab */
+show(localStorage.getItem('jejuDay')||'d1');
+paintCk(); setProg();
+</script>
+</body>
+</html>
