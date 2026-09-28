@@ -43,11 +43,14 @@ h1 small{display:block;font-size:13.5px;font-weight:600;color:var(--ink2);letter
 .cd b{font-size:22px;font-weight:800;letter-spacing:-.4px}
 .cd span{font-size:11.5px;opacity:.9;font-weight:600}
 .wallet{
-  display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;
-  padding:11px 16px;border-radius:14px;background:rgba(255,255,255,.58);
-  border:1.5px dashed var(--gold);font-size:13.5px;font-weight:700;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;
+  padding:12px 16px;border-radius:15px;background:rgba(255,255,255,.6);
+  border:1.5px dashed var(--gold);
 }
-.wallet b{font-size:19px;color:var(--terra);font-variant-numeric:tabular-nums}
+.wallet .wl{min-width:0}
+.wallet .lab{font-size:12px;font-weight:800;color:var(--ink2);letter-spacing:.03em}
+.wallet .sub{font-size:10.5px;font-weight:600;color:var(--ink3);line-height:1.5;margin-top:2px}
+.wallet b{font-size:21px;color:var(--terra);font-variant-numeric:tabular-nums;white-space:nowrap}
 
 /* ── Tabs ── */
 nav.tabs{position:sticky;top:0;z-index:30;display:flex;gap:7px;overflow-x:auto;padding:11px 0 12px;
@@ -96,17 +99,23 @@ nav.tabs button[aria-selected=true] .d{opacity:.72}
   border-left:3.5px solid var(--moss);font-size:12.5px;line-height:1.72;color:#5A6644}
 .bg .bt{display:block;font-size:10.5px;font-weight:800;letter-spacing:.14em;color:var(--moss);margin-bottom:4px}
 /* 记账 */
-.costrow{display:flex;align-items:center;gap:8px;margin-top:12px;padding-top:11px;border-top:1.5px dashed rgba(74,55,40,.16)}
-.costrow label{font-size:11.5px;font-weight:800;color:var(--ink3);letter-spacing:.04em;flex:0 0 auto}
-.costrow input{
-  width:96px;font-family:inherit;font-size:14.5px;font-weight:800;color:var(--terra);
-  background:rgba(255,255,255,.85);border:1.7px solid rgba(201,111,74,.3);border-radius:9px;
-  padding:5px 9px;text-align:right;font-variant-numeric:tabular-nums;
-}
-.costrow input:focus{outline:none;border-color:var(--terra);background:#fff}
-.costrow input::placeholder{color:var(--ink3);font-weight:600;font-size:12.5px}
-.costrow .u{font-size:12px;font-weight:700;color:var(--ink3)}
-.costrow .ref{margin-left:auto;font-size:10.5px;color:var(--ink3);font-weight:600;text-align:right;line-height:1.45}
+.costrow{display:flex;align-items:center;gap:6px;margin-top:12px;padding-top:11px;
+  border-top:1.5px dashed rgba(74,55,40,.16);flex-wrap:wrap}
+.costrow .lab{font-size:11px;font-weight:800;color:var(--ink3);letter-spacing:.04em;flex:0 0 auto;margin-right:2px}
+.cur{display:inline-flex;align-items:center;background:rgba(255,255,255,.88);
+  border:1.7px solid rgba(74,55,40,.18);border-radius:9px;padding:0 3px 0 7px;height:30px}
+.cur .sym{font-size:12.5px;font-weight:800;color:var(--ink3);flex:0 0 auto}
+.cur input{width:70px;font-family:inherit;font-size:14px;font-weight:800;background:transparent;
+  border:0;padding:4px 6px 4px 1px;text-align:right;font-variant-numeric:tabular-nums;color:var(--ink);min-width:0}
+.cur input:focus{outline:none}
+.cur input::placeholder{color:var(--ink3);font-weight:600;font-size:12px}
+.cur.cny{border-color:rgba(201,111,74,.34);background:rgba(255,252,247,.9)}
+.cur.cny .sym,.cur.cny input{color:var(--terra)}
+.cur.krw{border-color:rgba(91,147,168,.34);background:rgba(248,252,253,.9)}
+.cur.krw .sym,.cur.krw input{color:var(--sea)}
+.costrow .or{font-size:10.5px;color:var(--ink3);font-weight:700;flex:0 0 auto}
+.costrow .ref{margin-left:auto;font-size:10.5px;color:var(--ink3);font-weight:600;
+  text-align:right;line-height:1.45;flex:0 0 auto;text-align:right}
 
 /* 操作条 */
 .tools{display:flex;gap:7px;align-items:center;margin-top:12px;flex-wrap:wrap}
@@ -182,8 +191,11 @@ footer{margin-top:34px;text-align:center;font-size:11.5px;color:var(--ink3);line
   </h1>
   <div class="cd" id="cd"></div>
   <div class="wallet">
-    <span>💰 全程已记支出</span>
-    <span><b id="gtotal">₩0</b></span>
+    <div class="wl">
+      <div class="lab">💰 全程已记支出 · 折算人民币</div>
+      <div class="sub" id="gbreak"></div>
+    </div>
+    <b id="gtotal">¥0</b>
   </div>
 </header>
 
@@ -239,6 +251,7 @@ footer{margin-top:34px;text-align:center;font-size:11.5px;color:var(--ink3);line
 
 <footer>
   行程与花费自动存在这台设备的浏览器里 · 换设备不会同步<br>
+  记账每项 <b>人民币 / 韩元填一个就行</b>，汇总按 <b>27,000 元 ↔ 550,000 ₩</b>（1¥ ≈ 20.37₩）折成人民币<br>
   韩文地名请直接复制到 <b>Naver Map</b> 搜索，命中率最高
 </footer>
 </div>
@@ -571,8 +584,21 @@ function mapLinks(a){
 const DAYMAP=DAYS.map(x=>x.date.replace(/-/g,"-"));
 const cur=()=>localStorage.getItem("jDay")||"d1";
 const ckKey=i=>"jCk_"+DAYS.find(x=>x.id===i.day).date+"_"+i.n;
-const costKey=i=>"jCost_"+DAYS.find(x=>x.id===i.day).date+"_"+i.n;
+const kk=(t,i)=>"jCost"+t+"_"+DAYS.find(x=>x.id===i.day).date+"_"+i.n;
 const saved=(k,dflt="")=>localStorage.getItem(k)??dflt;
+/* 汇率：27,000 元 ↔ 550,000 ₩（你实际换汇的比例）*/
+const RATE=550000/27000;              // 1 元 = 20.3704 ₩
+const fmtY=v=>"¥"+(Math.round(v*10)/10).toLocaleString("zh-CN",{maximumFractionDigits:1});
+const fmtW=v=>"₩"+Math.round(v).toLocaleString();
+/* 兼容旧版：原来只存了一个数字（当时按 ₩ 记），迁到韩元字段 */
+(function(){
+  let m=0;
+  DAYS.forEach(D=>D.items.forEach((a,i)=>{
+    const old=saved("jCost_"+D.date+"_"+i);
+    if(old!=="" && !saved(kk("k",{day:D.id,n:i})))  {localStorage.setItem(kk("k",{day:D.id,n:i}),old);m++;}
+  }));
+  if(m)console.log("已迁移旧支出记录",m,"条 → 韩元");
+})();
 
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
@@ -585,12 +611,12 @@ function show(id,scroll=true){
     </div>
     <div class="daybar">
       <div class="lab">💰 ${esc(D.date)} 当日已记</div>
-      <div class="amt"><span id="dtotal" style="font-size:19px;font-weight:800;color:#FFF3DE">₩0</span><br><span id="dcount"></span></div>
+      <div class="amt"><span id="dtotal" style="font-size:19px;font-weight:800;color:#FFF3DE">¥0</span><br><span id="dcount"></span></div>
     </div>
     ${D.items.map((a,n)=>{
       const k={day:id,n};
       const done=saved(ckKey(k))==="1";
-      const val=saved(costKey(k));
+      const val={c:saved(kk("c",k)),k:saved(kk("k",k))};
       return `<article class="item ${done?"done":""}">
         <div class="time">${esc(a.t)}</div>
         <div class="h"><span class="ic">${a.ic}</span><span>${esc(a.h)}${a.kr?`<span class="kr">${esc(a.kr)}</span>`:""}</span></div>
@@ -599,10 +625,12 @@ function show(id,scroll=true){
         ${a.bg?`<div class="bg"><span class="bt">背景</span>${a.bg}</div>`:""}
         ${a.d&&a.d.filter(Boolean).length?`<ul class="d">${a.d.filter(Boolean).map(x=>`<li>${x}</li>`).join("")}</ul>`:""}
           <div class="costrow">
-          <label>💰 实际</label>
-          <input type="number" inputmode="decimal" min="0" step="100" placeholder="0"
-            data-cost="${esc(ckKey(k))}" value="${esc(val)}" aria-label="${esc(a.h)} 支出">
-          <span class="u">₩</span>
+          <span class="lab">💰</span>
+          <span class="cur cny"><span class="sym">¥</span><input type="number" inputmode="decimal" min="0" step="1" placeholder="0"
+            data-cny="${esc(kk("c",k))}" value="${esc(val.c)}" aria-label="${esc(a.h)} 人民币支出"></span>
+          <span class="or">或</span>
+          <span class="cur krw"><span class="sym">₩</span><input type="number" inputmode="numeric" min="0" step="100" placeholder="0"
+            data-krw="${esc(kk("k",k))}" value="${esc(val.k)}" aria-label="${esc(a.h)} 韩元支出"></span>
           ${a.c?`<span class="ref">参考价<br>${a.c.toLocaleString()} ₩</span>`:`<span class="ref">免费</span>`}
         </div>
         <div class="tools">
@@ -618,26 +646,34 @@ function show(id,scroll=true){
   if(scroll)window.scrollTo({top:0,behavior:"instant"});
 }
 function syncTotals(){
-  let grand=0,day=0,n=0;
-  document.querySelectorAll('input[data-cost]').forEach(inp=>{
-    const v=Number(inp.value||0);
-    if(v){day+=v;n++;}
-  });
+  let gC=0,gW=0,dC=0,dW=0,dn=0;
   for(const D of DAYS){
-    let s=0;
-    D.items.forEach((a,i)=>{s+=Number(saved("jCost_"+D.date+"_"+i)||0)});
-    grand+=s;
+    D.items.forEach((a,i)=>{
+      const c=Number(saved(kk("c",{day:D.id,n:i}))||0);
+      const w=Number(saved(kk("k",{day:D.id,n:i}))||0);
+      gC+=c;gW+=w;
+      if(D.id===cur()){dC+=c;dW+=w;if(c||w)dn++;}
+    });
   }
-  const dt=document.getElementById('dtotal');
-  if(dt){dt.textContent="₩"+day.toLocaleString();document.getElementById('dcount').textContent=n?`${n} 笔记录`:"";}
-  const g=document.getElementById('gtotal');
-  if(g)g.textContent="₩"+grand.toLocaleString();
+  const mix=t=>{
+    const a=[];if(t.c)a.push(fmtY(t.c)+" 人民币");if(t.w)a.push(fmtW(t.w)+" 韩元");
+    return a.join(" ＋ ")||"还没记账";
+  };
+  const dt=document.getElementById("dtotal");
+  if(dt){
+    dt.textContent=fmtY(dC+dW/RATE);
+    document.getElementById("dcount").textContent=(dC||dW)?`${dn} 笔 · ${mix({c:dC,w:dW})}`:"";
+  }
+  const g=document.getElementById("gtotal");
+  if(g){
+    g.textContent=fmtY(gC+gW/RATE);
+    document.getElementById("gbreak").textContent=
+      `${mix({c:gC,w:gW})}　｜　按 1¥ ≈ ${RATE.toFixed(2)}₩ 折算`;
+  }
 }
 document.addEventListener('input',e=>{
-  if(e.target.matches('input[data-cost]')){
-    localStorage.setItem(e.target.dataset.cost,e.target.value);
-    syncTotals();
-  }
+  if(e.target.matches('input[data-cny]')){localStorage.setItem(e.target.dataset.cny,e.target.value);syncTotals();}
+  if(e.target.matches('input[data-krw]')){localStorage.setItem(e.target.dataset.krw,e.target.value);syncTotals();}
 });
 document.addEventListener('click',e=>{
   const b=e.target.closest('[data-ck]');
